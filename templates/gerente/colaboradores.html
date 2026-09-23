@@ -1,0 +1,53 @@
+{% extends "gerente/base_gerente.html" %}
+{% block titulo %}Colaboradores · Panel del Gerente{% endblock %}
+{% block titulo_pagina %}Colaboradores{% endblock %}
+{% block nav_colaboradores %}activo{% endblock %}
+
+{% block contenido_gerente %}
+<div class="panel">
+  <h2>Buscar y filtrar</h2>
+  <form method="get" class="fila-filtros">
+    <input type="text" name="q" placeholder="Buscar por nombre..." value="{{ busqueda }}">
+    <select name="area">
+      <option value="">Todas las áreas</option>
+      {% for area in areas %}
+        <option value="{{ area }}" {% if area == area_filtro %}selected{% endif %}>{{ area }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primario">Filtrar</button>
+    <a href="{% url 'gerente_colaboradores' %}" class="btn btn-secundario">Limpiar</a>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Listado ({{ colaboradores|length }})</h2>
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Puesto</th>
+        <th>Área</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th>Fecha de ingreso</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in colaboradores %}
+      <tr>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.puesto }}</td>
+        <td><span class="etiqueta-area">{{ c.area }}</span></td>
+        <td>{{ c.telefono }}</td>
+        <td>{{ c.correo }}</td>
+        <td>{{ c.fecha_ingreso }}</td>
+        <td><a class="btn btn-outline" href="{% url 'gerente_horarios' %}?area={{ c.area|urlencode }}">Ver horario</a></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="7" class="vacio">No se encontraron colaboradores.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

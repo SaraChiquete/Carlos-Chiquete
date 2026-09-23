@@ -1,0 +1,12 @@
+{% extends "gerente/base_gerente.html" %}
+{% block titulo %}Mi perfil · Panel del Gerente{% endblock %}
+{% block titulo_pagina %}Perfil{% endblock %}
+{% block nav_perfil %}activo{% endblock %}
+
+{% block contenido_gerente %}
+<div class="panel" style="max-width: 480px;">
+  <h2>Datos del gerente</h2>
+  <div class="perfil-dato"><span class="etiqueta">Nombre</span><span>{{ gerente.nombre }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Puesto</span><span>{{ gerente.puesto }}</span></div>
+</div>
+{% endblock %}

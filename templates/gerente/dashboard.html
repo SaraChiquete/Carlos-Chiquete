@@ -1,0 +1,46 @@
+{% extends "gerente/base_gerente.html" %}
+{% block titulo %}Dashboard · Panel del Gerente{% endblock %}
+{% block titulo_pagina %}Dashboard{% endblock %}
+{% block nav_dashboard %}activo{% endblock %}
+
+{% block contenido_gerente %}
+<div class="tarjetas-resumen">
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.total_colaboradores }}</div>
+    <div class="etiqueta">Total de colaboradores</div>
+  </div>
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.colaboradores_activos }}</div>
+    <div class="etiqueta">Colaboradores activos</div>
+  </div>
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.total_asistencias }}</div>
+    <div class="etiqueta">Asistencias registradas</div>
+  </div>
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.total_faltas }}</div>
+    <div class="etiqueta">Faltas registradas</div>
+  </div>
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.total_incidencias }}</div>
+    <div class="etiqueta">Incidencias</div>
+  </div>
+  <div class="tarjeta">
+    <div class="valor">{{ resumen.total_amonestaciones }}</div>
+    <div class="etiqueta">Amonestaciones</div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Áreas de la unidad</h2>
+  <div class="fila-filtros">
+    {% for area in resumen.areas %}
+      <a class="btn btn-secundario" href="{% url 'gerente_horarios' %}?area={{ area|urlencode }}">{{ area }}</a>
+    {% endfor %}
+  </div>
+  <p style="color:#6b6b6b; font-size: 13.5px;">
+    Todos los datos que ves aquí son <strong>datos de prueba</strong>. Cuando el proyecto se conecte a una
+    base de datos real, esta pantalla mostrará información en vivo generada por los modelos de Django.
+  </p>
+</div>
+{% endblock %}

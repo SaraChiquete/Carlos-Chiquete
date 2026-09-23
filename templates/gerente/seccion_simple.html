@@ -1,0 +1,35 @@
+{% extends "gerente/base_gerente.html" %}
+{% block titulo %}{{ titulo }} · Panel del Gerente{% endblock %}
+{% block titulo_pagina %}{{ titulo }}{% endblock %}
+{% block nav_asistencias %}{% if seccion == "asistencias" %}activo{% endif %}{% endblock %}
+{% block nav_faltas %}{% if seccion == "faltas" %}activo{% endif %}{% endblock %}
+{% block nav_incidencias %}{% if seccion == "incidencias" %}activo{% endif %}{% endblock %}
+{% block nav_amonestaciones %}{% if seccion == "amonestaciones" %}activo{% endif %}{% endblock %}
+
+{% block contenido_gerente %}
+<div class="panel">
+  <h2>{{ titulo }} de todos los colaboradores</h2>
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>Colaborador</th>
+        <th>Área</th>
+        <th>Fecha</th>
+        <th>Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in filas %}
+      <tr>
+        <td>{{ f.colaborador.nombre }}</td>
+        <td><span class="etiqueta-area">{{ f.colaborador.area }}</span></td>
+        <td>{{ f.fecha }}</td>
+        <td>{{ f.estatus|default:f.motivo|default:f.descripcion }}{% if f.nivel %} · {{ f.nivel }}{% endif %}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4" class="vacio">No hay registros de {{ titulo|lower }} todavía.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

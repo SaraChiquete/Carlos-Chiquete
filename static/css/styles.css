@@ -1,0 +1,320 @@
+/* ==========================================================================
+   VARIABLES DE MARCA (inspiradas en Cinépolis, sin copiar su sitio oficial)
+   ========================================================================== */
+:root {
+  --rojo-cinepolis: #8a0e2e;
+  --rojo-oscuro: #5c0a1f;
+  --rojo-claro: #b32347;
+  --dorado: #d4a53a;
+  --negro: #1a1a1a;
+  --gris-oscuro: #2b2b2b;
+  --gris-medio: #6b6b6b;
+  --gris-claro: #f4f4f6;
+  --blanco: #ffffff;
+  --verde-ok: #1f9d55;
+  --amarillo-warn: #d97706;
+  --rojo-error: #c0392b;
+  --sombra: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --radio: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--gris-claro);
+  color: var(--negro);
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+/* ==========================================================================
+   MENSAJES (django.contrib.messages)
+   ========================================================================== */
+.mensajes { margin: 0 0 16px 0; display: flex; flex-direction: column; gap: 8px; }
+.mensaje {
+  padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 500;
+}
+.mensaje.success { background: #e6f7ec; color: var(--verde-ok); border: 1px solid #b7ebc6; }
+.mensaje.error { background: #fdecea; color: var(--rojo-error); border: 1px solid #f7c6c0; }
+
+/* ==========================================================================
+   LOGIN
+   ========================================================================== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--rojo-oscuro) 0%, var(--negro) 100%);
+  padding: 20px;
+}
+.login-card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  width: 100%;
+  max-width: 380px;
+  padding: 36px 32px;
+}
+.login-logo {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.login-logo .marca {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--rojo-cinepolis);
+  letter-spacing: 0.5px;
+}
+.login-logo .subtitulo {
+  font-size: 13px;
+  color: var(--gris-medio);
+  margin-top: 2px;
+}
+.login-card h1 {
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0 24px;
+  color: var(--gris-oscuro);
+}
+.campo { margin-bottom: 16px; }
+.campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--gris-oscuro);
+}
+.campo input, .campo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.campo input:focus, .campo select:focus {
+  outline: none;
+  border-color: var(--rojo-cinepolis);
+}
+.btn {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+.btn-primario { background: var(--rojo-cinepolis); color: var(--blanco); width: 100%; }
+.btn-primario:hover { background: var(--rojo-oscuro); }
+.btn-secundario { background: var(--gris-claro); color: var(--gris-oscuro); }
+.btn-dorado { background: var(--dorado); color: var(--negro); }
+.btn-outline { background: transparent; border: 1px solid var(--rojo-cinepolis); color: var(--rojo-cinepolis); }
+
+.login-usuarios-prueba {
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--gris-medio);
+  background: var(--gris-claro);
+  border-radius: 8px;
+  padding: 12px 14px;
+  line-height: 1.6;
+}
+.login-usuarios-prueba strong { color: var(--gris-oscuro); }
+
+/* ==========================================================================
+   PANEL DEL GERENTE (pensado para escritorio / tablet)
+   ========================================================================== */
+.gerente-layout { display: flex; min-height: 100vh; }
+
+.gerente-sidebar {
+  width: 240px;
+  background: var(--negro);
+  color: var(--blanco);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.gerente-sidebar .marca {
+  padding: 22px 20px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--blanco);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.gerente-sidebar .marca span { color: var(--dorado); }
+.gerente-nav { flex: 1; padding: 14px 10px; }
+.gerente-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.gerente-nav li a:hover { background: rgba(255,255,255,0.06); color: var(--blanco); }
+.gerente-nav li a.activo { background: var(--rojo-cinepolis); color: var(--blanco); }
+.gerente-sidebar .salir {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+.gerente-sidebar .salir a:hover { color: var(--blanco); }
+
+.gerente-main { flex: 1; padding: 28px 34px; max-width: 100%; overflow-x: auto; }
+.gerente-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.gerente-topbar h1 { font-size: 22px; margin: 0; color: var(--gris-oscuro); }
+.gerente-topbar .usuario-actual { font-size: 13px; color: var(--gris-medio); }
+
+.tarjetas-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.tarjeta {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 18px 20px;
+}
+.tarjeta .valor { font-size: 28px; font-weight: 800; color: var(--rojo-cinepolis); }
+.tarjeta .etiqueta { font-size: 13px; color: var(--gris-medio); margin-top: 4px; }
+
+.panel {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 22px 24px;
+  margin-bottom: 22px;
+}
+.panel h2 { margin-top: 0; font-size: 17px; color: var(--gris-oscuro); }
+
+.fila-filtros { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.fila-filtros select, .fila-filtros input[type="text"] {
+  padding: 9px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px;
+}
+
+table.tabla-datos { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.tabla-datos th, table.tabla-datos td {
+  padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee;
+}
+table.tabla-datos th { color: var(--gris-medio); font-weight: 700; text-transform: uppercase; font-size: 11.5px; }
+table.tabla-datos tr:hover { background: var(--gris-claro); }
+
+.etiqueta-area {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  background: #fbe9ec; color: var(--rojo-cinepolis); font-size: 12px; font-weight: 600;
+}
+
+.lista-checkbox { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.lista-checkbox label {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  background: var(--gris-claro); border-radius: 8px; font-size: 14px; cursor: pointer;
+}
+.lista-checkbox input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--rojo-cinepolis); }
+
+.grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 14px 0; }
+.grid-form .campo input, .grid-form .campo select { width: 100%; }
+
+.badge-descanso { color: var(--gris-medio); font-style: italic; }
+
+/* ==========================================================================
+   PORTAL DEL COLABORADOR (pensado para celular)
+   ========================================================================== */
+.colab-app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--gris-claro);
+  display: flex;
+  flex-direction: column;
+}
+.colab-header {
+  background: linear-gradient(135deg, var(--rojo-cinepolis), var(--rojo-oscuro));
+  color: var(--blanco);
+  padding: 22px 20px 26px;
+  border-radius: 0 0 22px 22px;
+}
+.colab-header .saludo { font-size: 20px; font-weight: 700; }
+.colab-header .rol { font-size: 12.5px; opacity: 0.85; margin-top: 2px; }
+
+.colab-contenido { padding: 18px 16px 90px; flex: 1; }
+
+.colab-tarjeta {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.colab-tarjeta h3 {
+  margin: 0 0 10px; font-size: 14px; color: var(--gris-medio); text-transform: uppercase; letter-spacing: 0.4px;
+}
+.turno-destacado .area { font-size: 17px; font-weight: 700; color: var(--rojo-cinepolis); }
+.turno-destacado .horas { font-size: 22px; font-weight: 800; margin-top: 4px; }
+.turno-destacado .dia { font-size: 13px; color: var(--gris-medio); margin-top: 2px; }
+
+.grid-resumen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mini-tarjeta {
+  background: var(--blanco); border-radius: 12px; box-shadow: var(--sombra);
+  padding: 14px; text-align: center;
+}
+.mini-tarjeta .num { font-size: 22px; font-weight: 800; color: var(--rojo-cinepolis); }
+.mini-tarjeta .txt { font-size: 12px; color: var(--gris-medio); margin-top: 2px; }
+
+.fila-horario-dia {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid #eee; font-size: 13.5px;
+}
+.fila-horario-dia:last-child { border-bottom: none; }
+.fila-horario-dia .dia-nombre { font-weight: 700; width: 90px; }
+.fila-horario-dia .area-nombre { color: var(--gris-medio); }
+.fila-horario-dia .horas { font-weight: 600; text-align: right; }
+
+.colab-nav-inferior {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px;
+  background: var(--blanco); box-shadow: 0 -4px 14px rgba(0,0,0,0.08);
+  display: flex; justify-content: space-around; padding: 10px 6px;
+}
+.colab-nav-inferior a {
+  font-size: 11px; color: var(--gris-medio); text-align: center; display: flex;
+  flex-direction: column; align-items: center; gap: 4px; flex: 1;
+}
+.colab-nav-inferior a.activo { color: var(--rojo-cinepolis); font-weight: 700; }
+.colab-nav-inferior .icono { font-size: 18px; }
+
+.registro-item {
+  padding: 12px 0; border-bottom: 1px solid #eee; font-size: 13.5px;
+}
+.registro-item:last-child { border-bottom: none; }
+.registro-item .fecha { font-weight: 700; }
+.registro-item .detalle { color: var(--gris-medio); margin-top: 2px; }
+.vacio { color: var(--gris-medio); font-size: 13.5px; text-align: center; padding: 20px 0; }
+
+.perfil-dato { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+.perfil-dato:last-child { border-bottom: none; }
+.perfil-dato .etiqueta { color: var(--gris-medio); }
+
+/* Responsive: en pantallas angostas el panel del gerente colapsa a columna */
+@media (max-width: 900px) {
+  .gerente-layout { flex-direction: column; }
+  .gerente-sidebar { width: 100%; flex-direction: row; overflow-x: auto; }
+  .gerente-sidebar .marca, .gerente-sidebar .salir { display: none; }
+  .gerente-nav { display: flex; padding: 8px; }
+  .gerente-nav li a { white-space: nowrap; }
+  .gerente-main { padding: 18px; }
+}

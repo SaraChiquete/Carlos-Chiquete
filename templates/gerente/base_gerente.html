@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="gerente-layout">
+  <aside class="gerente-sidebar">
+    <div class="marca">CINÉ<span>POLIS</span></div>
+    <ul class="gerente-nav">
+      <li><a href="{% url 'gerente_dashboard' %}" class="{% block nav_dashboard %}{% endblock %}">🏠 Dashboard</a></li>
+      <li><a href="{% url 'gerente_colaboradores' %}" class="{% block nav_colaboradores %}{% endblock %}">👥 Colaboradores</a></li>
+      <li><a href="{% url 'gerente_horarios' %}" class="{% block nav_horarios %}{% endblock %}">🗓️ Horarios</a></li>
+      <li><a href="{% url 'gerente_seccion_simple' 'asistencias' %}" class="{% block nav_asistencias %}{% endblock %}">✅ Asistencias</a></li>
+      <li><a href="{% url 'gerente_seccion_simple' 'faltas' %}" class="{% block nav_faltas %}{% endblock %}">🚫 Faltas</a></li>
+      <li><a href="{% url 'gerente_seccion_simple' 'incidencias' %}" class="{% block nav_incidencias %}{% endblock %}">⚠️ Incidencias</a></li>
+      <li><a href="{% url 'gerente_seccion_simple' 'amonestaciones' %}" class="{% block nav_amonestaciones %}{% endblock %}">📄 Amonestaciones</a></li>
+      <li><a href="{% url 'gerente_perfil' %}" class="{% block nav_perfil %}{% endblock %}">🙍 Perfil</a></li>
+    </ul>
+    <div class="salir"><a href="{% url 'logout' %}">⏻ Cerrar sesión</a></div>
+  </aside>
+
+  <main class="gerente-main">
+    <div class="gerente-topbar">
+      <h1>{% block titulo_pagina %}{% endblock %}</h1>
+      <div class="usuario-actual">{{ sesion_nombre }} · Gerente de Unidad</div>
+    </div>
+
+    {% if messages %}
+      <div class="mensajes">
+        {% for m in messages %}
+          <div class="mensaje {{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% block contenido_gerente %}{% endblock %}
+  </main>
+</div>
+{% endblock %}

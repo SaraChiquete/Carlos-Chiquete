@@ -1,0 +1,22 @@
+{% extends "colaborador/base_colaborador.html" %}
+{% block titulo %}Mi perfil · Portal del Colaborador{% endblock %}
+{% block nav_perfil %}activo{% endblock %}
+
+{% block header_colaborador %}
+  <div class="saludo">Mi perfil 🙍</div>
+  <div class="rol">{{ colaborador.nombre }}</div>
+{% endblock %}
+
+{% block contenido_colaborador %}
+<div class="colab-tarjeta">
+  <div class="perfil-dato"><span class="etiqueta">Nombre</span><span>{{ colaborador.nombre }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Puesto</span><span>{{ colaborador.puesto }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Área</span><span>{{ colaborador.area }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Teléfono</span><span>{{ colaborador.telefono }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Correo</span><span>{{ colaborador.correo }}</span></div>
+  <div class="perfil-dato"><span class="etiqueta">Fecha de ingreso</span><span>{{ colaborador.fecha_ingreso }}</span></div>
+</div>
+<div style="text-align:center; margin-top: 18px;">
+  <a href="{% url 'logout' %}" class="btn btn-outline">Cerrar sesión</a>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "colaborador/base_colaborador.html" %}
+{% block titulo %}Inicio · Portal del Colaborador{% endblock %}
+{% block nav_inicio %}activo{% endblock %}
+
+{% block header_colaborador %}
+  <div class="saludo">Hola, {{ primer_nombre }} 👋</div>
+  <div class="rol">{{ colaborador.puesto }} · {{ colaborador.area }}</div>
+{% endblock %}
+
+{% block contenido_colaborador %}
+<div class="colab-tarjeta turno-destacado">
+  <h3>Próximo turno</h3>
+  {% if proximo_turno %}
+    <div class="area">Área: {{ proximo_turno.area }}</div>
+    <div class="horas">{{ proximo_turno.entrada }} - {{ proximo_turno.salida }}</div>
+    <div class="dia">Día: {{ proximo_turno.dia }}</div>
+  {% else %}
+    <p class="vacio">No tienes un próximo turno asignado.</p>
+  {% endif %}
+</div>
+
+<div class="grid-resumen">
+  <a href="{% url 'colaborador_seccion_simple' 'asistencias' %}" class="mini-tarjeta">
+    <div class="num">{{ num_asistencias }}</div>
+    <div class="txt">Asistencias</div>
+  </a>
+  <a href="{% url 'colaborador_seccion_simple' 'faltas' %}" class="mini-tarjeta">
+    <div class="num">{{ num_faltas }}</div>
+    <div class="txt">Faltas</div>
+  </a>
+  <a href="{% url 'colaborador_seccion_simple' 'incidencias' %}" class="mini-tarjeta">
+    <div class="num">{{ num_incidencias }}</div>
+    <div class="txt">Incidencias</div>
+  </a>
+  <a href="{% url 'colaborador_seccion_simple' 'amonestaciones' %}" class="mini-tarjeta">
+    <div class="num">{{ num_amonestaciones }}</div>
+    <div class="txt">Amonestaciones</div>
+  </a>
+</div>
+{% endblock %}

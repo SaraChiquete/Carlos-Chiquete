@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}Iniciar sesión · Cinépolis{% endblock %}
+{% block body %}
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="marca">CINÉPOLIS</div>
+      <div class="subtitulo">Gestión y Seguimiento de Colaboradores</div>
+    </div>
+    <h1>Iniciar sesión</h1>
+
+    {% if messages %}
+      <div class="mensajes">
+        {% for m in messages %}
+          <div class="mensaje {{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="campo">
+        <label for="id_usuario">Usuario</label>
+        <input type="text" id="id_usuario" name="usuario" placeholder="ej. gerente / ana" required autofocus>
+      </div>
+      <div class="campo">
+        <label for="id_password">Contraseña</label>
+        <input type="password" id="id_password" name="password" placeholder="1234" required>
+      </div>
+      <button type="submit" class="btn btn-primario">Entrar</button>
+    </form>
+
+    <div class="login-usuarios-prueba">
+      <strong>Usuarios de prueba</strong> (contraseña para todos: <strong>1234</strong>)<br>
+      Gerente: <strong>gerente</strong><br>
+      Colaboradores: <strong>ana</strong>, <strong>carlos</strong>, <strong>maria</strong>, <strong>juan</strong>, <strong>laura</strong>
+    </div>
+  </div>
+</div>
+{% endblock %}

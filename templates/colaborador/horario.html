@@ -1,0 +1,36 @@
+{% extends "colaborador/base_colaborador.html" %}
+{% block titulo %}Mi horario · Portal del Colaborador{% endblock %}
+{% block nav_horario %}activo{% endblock %}
+
+{% block header_colaborador %}
+  <div class="saludo">Mi horario 🗓️</div>
+  <div class="rol">Área asignada: {{ colaborador.area }}</div>
+{% endblock %}
+
+{% block contenido_colaborador %}
+<div class="colab-tarjeta turno-destacado">
+  <h3>Próximo turno</h3>
+  {% if proximo_turno %}
+    <div class="area">Área: {{ proximo_turno.area }}</div>
+    <div class="horas">{{ proximo_turno.entrada }} - {{ proximo_turno.salida }}</div>
+    <div class="dia">Día: {{ proximo_turno.dia }}</div>
+  {% else %}
+    <p class="vacio">No tienes un próximo turno asignado.</p>
+  {% endif %}
+</div>
+
+<div class="colab-tarjeta">
+  <h3>Horario semanal</h3>
+  {% for t in semana %}
+    <div class="fila-horario-dia">
+      <span class="dia-nombre">{{ t.dia }}</span>
+      {% if t.area %}
+        <span class="area-nombre">{{ t.area }}</span>
+        <span class="horas">{{ t.entrada }} – {{ t.salida }}</span>
+      {% else %}
+        <span class="badge-descanso">Descanso</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

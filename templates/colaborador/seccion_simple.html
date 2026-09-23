@@ -1,0 +1,24 @@
+{% extends "colaborador/base_colaborador.html" %}
+{% block titulo %}{{ titulo }} · Portal del Colaborador{% endblock %}
+{% block nav_asistencias %}{% if seccion == "asistencias" %}activo{% endif %}{% endblock %}
+{% block nav_incidencias %}{% if seccion == "incidencias" %}activo{% endif %}{% endblock %}
+
+{% block header_colaborador %}
+  <div class="saludo">{{ titulo }}</div>
+  <div class="rol">{{ colaborador.nombre }}</div>
+{% endblock %}
+
+{% block contenido_colaborador %}
+<div class="colab-tarjeta">
+  {% for r in registros %}
+    <div class="registro-item">
+      <div class="fecha">{{ r.fecha }}</div>
+      <div class="detalle">
+        {{ r.estatus|default:r.motivo|default:r.descripcion }}{% if r.nivel %} · {{ r.nivel }}{% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p class="vacio">No tienes registros en esta sección.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "gerente/base_gerente.html" %}
+{% block titulo %}Horarios · Panel del Gerente{% endblock %}
+{% block titulo_pagina %}Horarios{% endblock %}
+{% block nav_horarios %}activo{% endblock %}
+
+{% block contenido_gerente %}
+
+<div class="panel">
+  <h2>1. Seleccionar área</h2>
+  <form method="get" class="fila-filtros">
+    <select name="area" onchange="this.form.submit()">
+      <option value="">-- Selecciona un área --</option>
+      {% for area in areas %}
+        <option value="{{ area }}" {% if area == area_seleccionada %}selected{% endif %}>{{ area }}</option>
+      {% endfor %}
+    </select>
+  </form>
+</div>
+
+{% if area_seleccionada %}
+
+  <div class="panel">
+    <h2>2. Colaboradores del área: <span class="etiqueta-area">{{ area_seleccionada }}</span></h2>
+
+    {% if colaboradores_area %}
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="accion" value="guardar_horario">
+      <input type="hidden" name="area" value="{{ area_seleccionada }}">
+
+      <label style="font-size:13px; color:#6b6b6b;">
+        <input type="checkbox" id="seleccionar-todos"> Seleccionar todos
+      </label>
+
+      <div class="lista-checkbox">
+        {% for c in colaboradores_area %}
+        <label>
+          <input type="checkbox" class="chk-colaborador" name="colaboradores" value="{{ c.id }}">
+          {{ c.nombre }} <span style="color:#6b6b6b;">— {{ c.puesto }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      <h2 style="margin-top:22px;">3. Día y horario</h2>
+      <div class="grid-form">
+        <div class="campo">
+          <label for="id_dia">Día</label>
+          <select id="id_dia" name="dia" required>
+            {% for dia in dias %}
+              <option value="{{ dia }}">{{ dia }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="campo">
+          <label for="id_entrada">Hora de entrada</label>
+          <input type="time" id="id_entrada" name="entrada" value="12:00">
+        </div>
+        <div class="campo">
+          <label for="id_salida">Hora de salida</label>
+          <input type="time" id="id_salida" name="salida" value="20:00">
+        </div>
+        <div class="campo" style="display:flex; align-items:center; margin-top: 20px;">
+          <label style="display:flex; gap:8px; align-items:center; font-weight:400;">
+            <input type="checkbox" id="id_es_descanso" name="es_descanso" style="width:auto;">
+            Marcar como descanso
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primario">Guardar horario</button>
+    </form>
+    {% else %}
+      <p class="vacio">No hay colaboradores registrados en esta área todavía.</p>
+    {% endif %}
+  </div>
+
+  {% if horarios_area %}
+  <div class="panel">
+    <h2>Horario semanal actual — {{ area_seleccionada }}</h2>
+    <div style="display:flex; gap:10px; margin-bottom:16px;">
+      <a class="btn btn-dorado" href="{% url 'gerente_horarios_pdf' %}?area={{ area_seleccionada|urlencode }}">
+        ⬇ Descargar horario del área en PDF
+      </a>
+      <a class="btn btn-secundario" href="{% url 'gerente_horarios_pdf' %}">
+        ⬇ Descargar horario general en PDF
+      </a>
+    </div>
+
+    <table class="tabla-datos">
+      <thead>
+        <tr>
+          <th>Colaborador</th>
+          {% for dia in dias %}<th>{{ dia }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in horarios_area %}
+        <tr>
+          <td>{{ fila.colaborador.nombre }}</td>
+          {% for turno in fila.semana %}
+            <td>
+              {% if turno.area %}
+                {{ turno.entrada }}–{{ turno.salida }}<br>
+                <span style="color:#6b6b6b; font-size:12px;">{{ turno.area }}</span>
+              {% else %}
+                <span class="badge-descanso">Descanso</span>
+              {% endif %}
+            </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+{% endif %}
+{% endblock %}
